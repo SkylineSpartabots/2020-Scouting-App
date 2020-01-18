@@ -68,6 +68,10 @@ public class GameData {
     @ColumnInfo(name= "Helped Climbed")
     public boolean isHelperClimbed;
 
+    @ColumnInfo(name= "Can Go Under Control Panel")
+    public boolean canGoUnderControl;
+
+
     @ColumnInfo(name= "Additional Comments")
     public String additionalComments;
 

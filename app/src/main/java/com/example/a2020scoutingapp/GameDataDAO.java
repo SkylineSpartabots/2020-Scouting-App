@@ -3,6 +3,8 @@ package com.example.a2020scoutingapp;
 import java.util.List;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
 import androidx.room.Query;
 
 @Dao
@@ -25,6 +27,11 @@ public interface GameDataDAO {
     //get total teleop points teams
     @Query("Select Distinct TeamNumber  FROM RawData Order By `Total Teleop points` ")
     List<String> TeamsInAsscendingTelePointsOrder();
+    @Insert
+    void insert(GameData...gameData);
+    @Delete
+    void delete(GameData...gameData);
+
 
 
 }
