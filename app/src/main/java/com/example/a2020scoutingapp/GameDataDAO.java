@@ -21,12 +21,12 @@ public interface GameDataDAO {
     @Query("Select Distinct TeamNumber  FROM RawData")
     List<String> allTeams();
 
-    //get total auto points teams
-    @Query("Select Distinct TeamNumber  FROM RawData Order By `Total Auto points`")
-    List<String> TeamsInAsscendingAutoPointsOrder();
-    //get total teleop points teams
-    @Query("Select Distinct TeamNumber  FROM RawData Order By `Total Teleop points` ")
-    List<String> TeamsInAsscendingTelePointsOrder();
+//    //get total auto points teams
+//    @Query("Select Distinct TeamNumber  FROM RawData Order By `Total Auto points`")
+//    List<String> TeamsInAsscendingAutoPointsOrder();
+//    //get total teleop points teams
+//    @Query("Select Distinct TeamNumber  FROM RawData Order By `Total Teleop points` ")
+//    List<String> TeamsInAsscendingTelePointsOrder();
     @Insert
     void insert(GameData...gameData);
     @Delete

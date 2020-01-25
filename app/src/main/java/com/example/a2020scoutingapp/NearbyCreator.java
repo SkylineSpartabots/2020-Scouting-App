@@ -1,6 +1,7 @@
 package com.example.a2020scoutingapp;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 
@@ -45,6 +47,20 @@ public class NearbyCreator {
 
     this.strategy = strategy;
   }
+///Call this static method to get permission from user
+  public static void  getPermissionToUseNearby(Activity activityContext){
+
+
+      if(ContextCompat.checkSelfPermission(activityContext, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+        ActivityCompat.requestPermissions(activityContext,
+                new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                2);
+      }
+
+
+
+  }
+
   public ConnectionsClient getConnectionClient(){
 
     return Nearby.getConnectionsClient(context);
@@ -474,7 +490,7 @@ public class NearbyCreator {
   }
 
   //This error is thrown when permission is not given
-  private class PermissionDeniedException extends Exception {
+  protected class PermissionDeniedException extends Exception {
     public PermissionDeniedException(String permission) {
       super("The permission " + permission + " was not given. Check if it is a permission the user has to allow");
     }
