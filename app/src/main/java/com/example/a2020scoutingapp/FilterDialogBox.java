@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -34,14 +35,35 @@ public class FilterDialogBox extends DialogFragment {
         addFilter=view.findViewById(R.id.filterButton);
         ed=view.findViewById(R.id.filterEditText);
         filters= new ArrayList<>();
+        final TextView viewFilters =view.findViewById(R.id.ViewFilters);
+
+        String bob="";
+        for(String s:filters){
+            bob+=" "+s;
+        }
+        viewFilters.setText("Current Filters are:"+ bob);
         addFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String bob="";
                 if(!filters.contains(ed.getText().toString())){
                 filters.add(ed.getText().toString());
+
+
+                    for(String s:filters){
+                        bob+=" "+s;
+                    }
+                    viewFilters.setText("Current Filters are:"+bob);
             }else{
                 filters.remove(ed.getText().toString());
-            }
+                    filters.add(ed.getText().toString());
+
+
+                    for(String s:filters){
+                        bob+=" "+s;
+                    }
+                    viewFilters.setText("Current Filters are:"+bob);
+                }
         }});
 
         builder.setView(view).setPositiveButton("Create", new Dialog.OnClickListener() {
