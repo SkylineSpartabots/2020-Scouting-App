@@ -42,4 +42,15 @@
         app:layout_constraintVertical_bias="0.918"
         app:srcCompat="@drawable/camera_icon" />
 
+    <Button
+        android:id="@+id/DataViewButton"
+        android:layout_width="311dp"
+        android:layout_height="80dp"
+        android:text="View All Data"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rview"
+        app:layout_constraintVertical_bias="0.877" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">2020 Scouting App</string>
+    <string name="title_activity_data_view">DataView</string>
+    <string name="filter">Filter</string>
 </resources>

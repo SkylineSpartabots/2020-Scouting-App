@@ -21,6 +21,7 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 public class AdvertiseMain extends AppCompatActivity {
     ImageButton cameraButton;
     Button advertiseButton;
+    Button dataViewButton;
 
     final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -30,6 +31,14 @@ public class AdvertiseMain extends AppCompatActivity {
         setContentView(R.layout.activity_advertise_main);
         cameraButton = findViewById(R.id.cameraButton);
         advertiseButton = findViewById(R.id.advertisebutton);
+        dataViewButton= findViewById(R.id.DataViewButton);
+        dataViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(AdvertiseMain.this,DataView.class));
+            }
+        });
 
         advertiseButton.setOnClickListener(new View.OnClickListener() {
             @Override
