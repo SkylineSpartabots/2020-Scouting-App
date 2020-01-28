@@ -15,5 +15,59 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
+        app:layout_constraintTop_toTopOf="parent">
+
+        <CheckBox
+            android:id="@+id/checkBox5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Parked" />
+
+        <CheckBox
+            android:id="@+id/checkBox4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Climbed" />
+
+        <CheckBox
+            android:id="@+id/checkBox3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Helped Climbed" />
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Balanced" />
+
+        <EditText
+            android:id="@+id/addtionalComments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Any Additional Comments?"
+            android:inputType="textMultiLine" />
+
+        <Button
+            android:id="@+id/advertise"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Advertise" />
+
+        <Button
+            android:id="@+id/QR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="QR" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/ic_launcher_background" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
