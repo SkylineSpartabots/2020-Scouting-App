@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">2020 Scouting App</string>
+    <string name="title_activity_data_view">DataView</string>
+    <string name="filter">Filter</string>
     <string name="title_activity_recording_data">RecordingData</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
