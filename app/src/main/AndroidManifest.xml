@@ -9,6 +9,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".RecordEndGame"
+            android:label="@string/title_activity_record_end_game"
+            android:parentActivityName=".RecordTeleOp"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.a2020scoutingapp.RecordTeleOp" />
+        </activity>
+        <activity
+            android:name=".RecordTeleOp"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.a2020scoutingapp.RecordAuto"></meta-data>
+        </activity>
+        <activity
+            android:name=".RecordAuto"
+            android:label="@string/title_activity_recording_data"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
