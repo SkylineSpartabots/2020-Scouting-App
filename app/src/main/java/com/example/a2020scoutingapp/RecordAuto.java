@@ -1,6 +1,7 @@
 package com.example.a2020scoutingapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -23,11 +24,12 @@ public class RecordAuto extends AppCompatActivity {
     ToggleButton blueRed;
     Button toTeleOp;
     NumberPicker cellsCollected;
-    NumberPicker preloadNum;
+    CheckBox preloadNum;
     NumberPicker rectScore;
     NumberPicker circScore;
     NumberPicker hexScore;
     CheckBox crossAuto;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class RecordAuto extends AppCompatActivity {
         //find IDs here
         teamInput = findViewById(R.id.teamInput);
         blueRed = findViewById(R.id.toggleButton);
-        preloadNum = findViewById(R.id.preloaded);
+        preloadNum = findViewById(R.id.hasPreload);
         crossAuto = findViewById(R.id.crossCheck);
         rectScore = findViewById(R.id.rectScore);
         circScore = findViewById(R.id.circScore);
@@ -57,8 +59,7 @@ public class RecordAuto extends AppCompatActivity {
         }
         //preloadNum
         preloadNum.getResources().getColor(R.color.white);
-        preloadNum.setMinValue(0);
-        preloadNum.setMaxValue(3);
+
 
         //cells collected
         cellsCollected.setMinValue(0);
@@ -93,6 +94,14 @@ public class RecordAuto extends AppCompatActivity {
         toTeleOp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String autoText="";
+                String delimeter="#@;-;@#";
+                autoText+=teamInput.getText().toString()+delimeter+blueRed.getText()+delimeter+cellsCollected.getValue()+delimeter+preloadNum.isChecked()
+                        +delimeter+ rectScore.getValue()+delimeter+circScore.getValue()+delimeter+hexScore.getValue()+delimeter+crossAuto.isChecked();
+                SharedPreferences sp= RecordAuto.this.getSharedPreferences("Saved Data",MODE_PRIVATE);
+                SharedPreferences.Editor ed=sp.edit();
+                ed.putString("AutoData",autoText);
+
                 startActivity(new Intent(RecordAuto.this,RecordTeleOp.class));
             }
         });
