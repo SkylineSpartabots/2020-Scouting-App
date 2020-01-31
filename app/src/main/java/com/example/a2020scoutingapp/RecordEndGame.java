@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 public class RecordEndGame extends AppCompatActivity {
     CheckBox parked;
@@ -22,6 +23,7 @@ public class RecordEndGame extends AppCompatActivity {
     EditText additionalComments;
     Button advertise;
     Button showQR;
+    ImageView qrImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +36,18 @@ public class RecordEndGame extends AppCompatActivity {
         climbed=findViewById(R.id.checkBox4);
         additionalComments=findViewById(R.id.addtionalComments);
         showQR=findViewById(R.id.QR);
+
+        qrImage=findViewById(R.id.imageView);
         advertise=findViewById(R.id.advertise);
         showQR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //TODO add qr code
+                SharedPreferences spe= RecordEndGame.this.getSharedPreferences("Saved Data",MODE_PRIVATE);
+
+                QRCreator cd= new QRCreator(""+spe.getString("AutoData","")+spe.getString("TeleData","")+spe.getString("EndGameData",""),20,20);
+
+
             }
         });
 
