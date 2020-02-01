@@ -22,6 +22,7 @@ public class RecordEndGame extends AppCompatActivity {
     CheckBox climbed;
     CheckBox balanced;
     CheckBox helped;
+    CheckBox defended;
     EditText additionalComments;
     Button advertise;
     Button showQR;
@@ -39,6 +40,7 @@ public class RecordEndGame extends AppCompatActivity {
         parked= findViewById(R.id.checkBox5);
         balanced=findViewById(R.id.checkBox2);
         climbed=findViewById(R.id.checkBox4);
+        defended=findViewById(R.id.Defended);
         additionalComments=findViewById(R.id.addtionalComments);
         showQR=findViewById(R.id.QR);
         clientName=findViewById(R.id.AdName);
@@ -138,7 +140,7 @@ public class RecordEndGame extends AppCompatActivity {
 
     private  void stringEndgame(){
         String delimeter="#@;-;@#";
-        String endText=delimeter+parked.isChecked()+delimeter+climbed.isChecked()+delimeter+helped.isChecked()+delimeter+balanced.isChecked()
+        String endText=delimeter+parked.isChecked()+delimeter+climbed.isChecked()+delimeter+helped.isChecked()+delimeter+balanced.isChecked()+defended.isChecked()
                 +delimeter+
                 additionalComments.getText().toString();
         SharedPreferences sp= RecordEndGame.this.getSharedPreferences("Saved Data",MODE_PRIVATE);

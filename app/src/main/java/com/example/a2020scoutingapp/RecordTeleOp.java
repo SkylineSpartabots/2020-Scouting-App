@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.NumberPicker;
 
+import java.util.Scanner;
+
 public class RecordTeleOp extends AppCompatActivity {
     CheckBox pickColor;
     Button endGame;
@@ -54,7 +56,19 @@ public class RecordTeleOp extends AppCompatActivity {
         rectNum.setMinValue(0);
         circNum.setMinValue(0);
         rotationControl.setMinValue(0);
+        final SharedPreferences sp= RecordTeleOp.this.getSharedPreferences("Saved Data",MODE_PRIVATE);
+        String se=sp.getString("TeleData","");
+        if(!se.equals("")){
+            Scanner sc =new Scanner(se);
+            sc.useDelimiter("#@;-;@#");
+            rectNum.setValue(sc.nextInt());
+            circNum.setValue(sc.nextInt());
+            hexNum.setValue(sc.nextInt());
+            missNum.setValue(sc.nextInt());
+            rotationControl.setValue(sc.nextInt());
+            pickColor.setChecked(sc.nextBoolean());
 
+        }
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +84,7 @@ public class RecordTeleOp extends AppCompatActivity {
                 String delimeter="#@;-;@#";
                 String teleText=delimeter+rectNum.getValue()+delimeter+circNum.getValue()+delimeter+hexNum.getValue()+delimeter+missNum.getValue()+delimeter+
                         rotationControl.getValue()+delimeter+pickColor.isChecked();
-                SharedPreferences sp= RecordTeleOp.this.getSharedPreferences("Saved Data",MODE_PRIVATE);
+
                 SharedPreferences.Editor ed=sp.edit();
                 ed.putString("TeleData",teleText);
 
