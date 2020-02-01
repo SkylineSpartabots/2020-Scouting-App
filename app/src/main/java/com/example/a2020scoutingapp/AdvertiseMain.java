@@ -45,11 +45,9 @@ public class AdvertiseMain extends AppCompatActivity {
             public void onClick(View view) {
                 NearbyCreator.getPermissionToUseNearby(AdvertiseMain.this);
                 NearbyCreator nearby;
-                try {
+
                     nearby = new NearbyCreator(AdvertiseMain.this, "Labib Master", Strategy.P2P_STAR);
-                } catch (NearbyCreator.PermissionDeniedException e) {
-                    e.printStackTrace();
-                }
+
 
 
                 Toast.makeText(AdvertiseMain.this, "advertising...", Toast.LENGTH_LONG).show();
@@ -76,7 +74,48 @@ public class AdvertiseMain extends AppCompatActivity {
 
     }
 
+NearbyCreator.OptionsOfAdvertising advertising= new NearbyCreator.OptionsOfAdvertising() {
+    @Override
+    public void OnDiscoverySuccess() {
+        Toast.makeText(AdvertiseMain.this,"Discovery was succesful",Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void OnDiscoveryFailure() {
+        Toast.makeText(AdvertiseMain.this,"Discovery was succesful",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void OnStringReceived(String s) {
+        Toast.makeText(AdvertiseMain.this,"String was received",Toast.LENGTH_SHORT).show();
+        //TODO Add to database
+    }
+
+    @Override
+    public void OnStringUpdate() {
+        Toast.makeText(AdvertiseMain.this,"Discovery was succesful",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void OnConnectionGood(String s) {
+
+    }
+
+    @Override
+    public void OnConnectionError() {
+
+    }
+
+    @Override
+    public void OnConnectionRejected() {
+
+    }
+
+    @Override
+    public void OnConnectionDisconnected() {
+
+    }
+};
 
 
     @Override
@@ -103,6 +142,8 @@ public class AdvertiseMain extends AppCompatActivity {
             Frame frame = new Frame.Builder().setBitmap(imageBitmap).build();
             SparseArray<Barcode> barcodes = detector.detect(frame);
             Barcode thisCode = barcodes.valueAt(0);
+            String finalValue=thisCode.displayValue;
+            //TODO Add to database final qr value
 
         }
     }

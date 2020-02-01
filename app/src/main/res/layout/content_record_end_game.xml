@@ -50,6 +50,15 @@
             android:hint="Any Additional Comments?"
             android:inputType="textMultiLine" />
 
+        <EditText
+            android:id="@+id/AdName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Scouter Name"
+            android:inputType="textPersonName"
+            android:text="Name" />
+
         <Button
             android:id="@+id/advertise"
             android:layout_width="match_parent"

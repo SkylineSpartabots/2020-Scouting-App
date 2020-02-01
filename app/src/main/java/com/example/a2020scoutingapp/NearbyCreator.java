@@ -37,12 +37,12 @@ public class NearbyCreator {
   private Strategy strategy;
 
   //Creates a new NearbyCreator with an id that will be shared among all connections and a strategy
-  public NearbyCreator(Context context, String id, Strategy strategy) throws PermissionDeniedException {
+  public NearbyCreator(Activity context, String id, Strategy strategy)  {
     connections= new ArrayList<>();
     this.context = context;
     this.id = id;
     if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-      throw new PermissionDeniedException("ACCESS_COARSE_LOCATION");
+      getPermissionToUseNearby(context);
     }
 
     this.strategy = strategy;
@@ -112,8 +112,8 @@ public class NearbyCreator {
       }
     }, new ConnectionResult() {
       @Override
-      public void ConnectionGood() {
-        optionsOfAdvertising.OnConnectionGood();
+      public void ConnectionGood(String s) {
+        optionsOfAdvertising.OnConnectionGood(s);
       }
 
       @Override
@@ -132,8 +132,8 @@ public class NearbyCreator {
       }
     }, new StringReceived() {
       @Override
-      public void OnReceived(String s) {
-        optionsOfAdvertising.OnStringReceived();
+      public void OnStringReceived(String s) {
+        optionsOfAdvertising.OnStringReceived(s);
       }
 
       @Override
@@ -151,7 +151,7 @@ public class NearbyCreator {
       @Override
       public void onPayloadReceived(@NonNull String s, @NonNull Payload payload) {
         String es = new String(payload.asBytes());
-        stringOptions.OnReceived(es);
+        stringOptions.OnStringReceived(es);
       }
 
       @Override
@@ -172,7 +172,7 @@ public class NearbyCreator {
         switch (result.getStatus().getStatusCode()) {
           case ConnectionsStatusCodes.STATUS_OK:
             // We're connected! Can now start sending and receiving data.
-            connectionOptions.ConnectionGood();
+            connectionOptions.ConnectionGood(s);
             connections.add(s);
             break;
           case ConnectionsStatusCodes.STATUS_CONNECTION_REJECTED:
@@ -255,8 +255,8 @@ public class NearbyCreator {
       }
     }, new ConnectionResult() {
       @Override
-      public void ConnectionGood() {
-        optionsOfDiscovery.OnConnectionGood();
+      public void ConnectionGood(String s) {
+        optionsOfDiscovery.OnConnectionGood(s);
       }
 
       @Override
@@ -275,8 +275,8 @@ public class NearbyCreator {
       }
     }, new StringReceived() {
       @Override
-      public void OnReceived(String s) {
-        optionsOfDiscovery.OnStringReceived();
+      public void OnStringReceived(String s) {
+        optionsOfDiscovery.OnStringReceived(s);
       }
 
       @Override
@@ -296,7 +296,7 @@ public class NearbyCreator {
       public void onPayloadReceived(@NonNull String s, @NonNull Payload payload) {
         String es = new String(payload.asBytes());
         if(connections.contains(s)){
-        stringOptions.OnReceived(es);}
+        stringOptions.OnStringReceived(es);}
       }
 
       @Override
@@ -317,7 +317,7 @@ public class NearbyCreator {
         switch (result.getStatus().getStatusCode()) {
           case ConnectionsStatusCodes.STATUS_OK:
             // We're connected! Can now start sending and receiving data.
-            connectionOptions.ConnectionGood();
+            connectionOptions.ConnectionGood(s);
             break;
           case ConnectionsStatusCodes.STATUS_CONNECTION_REJECTED:
             // The connection was rejected by one or both sides.
@@ -389,16 +389,16 @@ public class NearbyCreator {
 
   }
 
-  private interface OptionsOfAdvertising {
+  public  interface OptionsOfAdvertising {
     void OnDiscoverySuccess();
 
     void OnDiscoveryFailure();
 
-    void OnStringReceived();
+    void OnStringReceived(String s);
 
     void OnStringUpdate();
 
-    void OnConnectionGood();
+    void OnConnectionGood(String s);
 
     void OnConnectionError();
 
@@ -409,16 +409,16 @@ public class NearbyCreator {
 
 
   //This interface is a combination of the ones below
-  private interface OptionsOfDiscovery {
+  public interface OptionsOfDiscovery {
     void OnDiscoverySuccess();
 
     void OnDiscoveryFailure();
 
-    void OnStringReceived();
+    void OnStringReceived(String s);
 
     void OnStringUpdate();
 
-    void OnConnectionGood();
+    void OnConnectionGood(String s);
 
     void OnConnectionError();
 
@@ -453,7 +453,7 @@ public class NearbyCreator {
 
   // this is called when a string is sent
   private interface StringReceived {
-    void OnReceived(String s);
+    void OnStringReceived(String s);
 
     //When string is succesfully transfered
     void OnUpdate();
@@ -463,7 +463,7 @@ public class NearbyCreator {
   //called when a connection is tried
   private interface ConnectionResult {
     //connection is met and you can start sending
-    void ConnectionGood();
+    void ConnectionGood(String s);
 
     //Connection is rejected by one side
     void ConnectionRejected();
