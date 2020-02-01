@@ -19,6 +19,8 @@ import android.widget.NumberPicker;
 import android.widget.ToggleButton;
 import android.widget.Button;
 
+import java.util.Scanner;
+
 public class RecordAuto extends AppCompatActivity {
     EditText teamInput;
     ToggleButton blueRed;
@@ -49,7 +51,27 @@ public class RecordAuto extends AppCompatActivity {
         hexScore = findViewById(R.id.hexScore);
         toTeleOp = findViewById(R.id.teleButton);
         cellsCollected = findViewById(R.id.cellsCollected);
+        String s= getSharedPreferences("Saved Data",MODE_PRIVATE).getString("AutoData","");
+        if(!s.equals("")){
+            Scanner sc= new Scanner(s);
+            sc.useDelimiter(this.getString(R.string.delimeter));
+            //  autoText+=teamInput.getText().toString()+delimeter+blueRed.getText()+delimeter+cellsCollected.getValue()+delimeter+preloadNum.isChecked()
+            //                        +delimeter+ rectScore.getValue()+delimeter+circScore.getValue()+delimeter+hexScore.getValue()+delimeter+crossAuto.isChecked();
 
+            teamInput.setText(sc.next());
+            String r=sc.next();
+            if(r.equals("red")){
+
+                blueRed.setChecked(false);
+            }else{ blueRed.setChecked(true);}
+            cellsCollected.setValue(sc.nextInt());
+            preloadNum.setChecked(sc.nextBoolean());
+            rectScore.setValue(sc.nextInt());
+            circScore.setValue(sc.nextInt());
+            hexScore.setValue(sc.nextInt());
+            crossAuto.setChecked(sc.nextBoolean());
+
+        }
         //array of scores
         NumberPicker [] scores = {rectScore,circScore,hexScore};
         for (int i = 0; i < scores.length; i++) {

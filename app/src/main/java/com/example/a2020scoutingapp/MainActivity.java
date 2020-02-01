@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     EditText userName;
     EditText passWord;
     Button next;
+    Button guest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +24,12 @@ public class MainActivity extends AppCompatActivity {
         passWord = findViewById(R.id.password);
         userName = findViewById(R.id.username);
 
-
+        guest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,(RecordAuto.class)));
+            }
+        });
 
         next.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -37,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void validate(String userName, String passWord){
         if (userName.equals("thanksdavin") && passWord.equals("thankspranav")){
-            startActivity(new Intent(MainActivity.this,(RecordAuto.class)));
+            startActivity(new Intent(MainActivity.this,(AdvertiseMain.class)));
         }
     }
 }

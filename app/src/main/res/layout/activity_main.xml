@@ -57,9 +57,9 @@
 
     <Button
         android:id="@+id/guestButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Guest"
+        android:layout_width="272dp"
+        android:layout_height="137dp"
+        android:text="Start Scouting"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

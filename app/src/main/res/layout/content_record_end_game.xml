@@ -69,12 +69,14 @@
             android:id="@+id/advertise"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/Blue"
             android:text="Advertise" />
 
         <Button
             android:id="@+id/QR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/Blue"
             android:text="QR" />
 
         <ImageView
@@ -83,6 +85,17 @@
             android:layout_height="wrap_content"
             android:visibility="invisible"
             app:srcCompat="@drawable/ic_launcher_background" />
+
+        <Button
+            android:id="@+id/Exit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/Red"
+            android:backgroundTint="#00DB1414"
+            android:backgroundTintMode="screen"
+            android:text="Exit"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

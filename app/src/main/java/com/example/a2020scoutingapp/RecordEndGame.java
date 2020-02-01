@@ -1,5 +1,6 @@
 package com.example.a2020scoutingapp;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -29,6 +30,7 @@ public class RecordEndGame extends AppCompatActivity {
     ImageView qrImage;
     EditText clientName;
     NearbyCreator nc;
+    Button exit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,16 @@ public class RecordEndGame extends AppCompatActivity {
         clientName=findViewById(R.id.AdName);
         qrImage=findViewById(R.id.imageView);
         advertise=findViewById(R.id.advertise);
-
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences spe= RecordEndGame.this.getSharedPreferences("Saved Data",MODE_PRIVATE);
+                spe.edit().putString("AutoData","").apply();
+                spe.edit().putString("TeleData","").apply();
+                spe.edit().putString("EndGameData","").apply();
+                startActivity(new Intent(RecordEndGame.this,MainActivity.class));
+            }
+        });
         showQR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,7 +144,11 @@ public class RecordEndGame extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 stringEndgame();
-                nc.startDiscovery(clientName.getText().toString(),optionsOfDiscovery);
+
+                if(!clientName.getText().toString().equals("")){
+                nc.startDiscovery(clientName.getText().toString(),optionsOfDiscovery);}else{
+                    clientName.setError("Please enter a name");
+                }
             }
         });
     }

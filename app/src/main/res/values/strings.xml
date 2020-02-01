@@ -95,4 +95,5 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_record_tele_op">RecordTeleOp</string>
     <string name="title_activity_record_end_game">RecordEndGame</string>
+    <string name="delimeter">#@;-;@#</string>
 </resources>
