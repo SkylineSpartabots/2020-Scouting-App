@@ -9,6 +9,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -17,8 +19,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.ArrayList;
+
 public class DataView extends AppCompatActivity {
     GameRepository gameRepository;
+    RecyclerView rv;
+    DataAdapter da;
+    RecyclerView.LayoutManager lm;
+    ArrayList<GameData> allData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +34,14 @@ public class DataView extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         gameRepository=new GameRepository(this.getApplication());
+        rv=findViewById(R.id.dataView);
+        allData= (ArrayList<GameData>) gameRepository.getAllGames();
+        da= new DataAdapter(allData);
+
+        lm=new LinearLayoutManager(this);
+        rv.setAdapter(da);
+
+        rv.setLayoutManager(lm);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

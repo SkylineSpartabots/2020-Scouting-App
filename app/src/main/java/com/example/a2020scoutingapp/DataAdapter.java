@@ -7,10 +7,19 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class DataAdapter extends RecyclerView.Adapter<DataAdapter.Holder> {
+public class DataAdapter extends
+        RecyclerView.Adapter<DataAdapter.Holder> {
+    List<GameData> allData;
+
+    public DataAdapter(List<GameData> allData){
+        this.allData=allData;
+
+    }
 
     @NonNull
     @Override
@@ -21,12 +30,38 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.Holder> {
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-
+        GameData g=allData.get(position);
+        holder.matchNumber.setText(g.matchNumber);
+        holder.teamNumber.setText(g.teamNumber);
+        holder.startPosition.setText(g.startSide);
+        holder.preLoadedBalls.setText(g.preloadedBalls+"");
+        holder.autoCircle.setText(g.cellsShotCircleAuto);
+        holder.autoHex.setText(g.cellsShotHexagonAuto);
+        holder.autoRect.setText(g.cellsShotRectAuto);
+        holder.crossedLine.setText(g.crossedLine+"");
+        holder.cellsCollected.setText(g.cellsCollected);
+        holder.hex.setText(g.cellsShotHexagon);
+        holder.rect.setText(g.cellsShotRect);
+        holder.circle.setText(g.cellsShotCircle);
+        holder.missed.setText(g.cellsMissedTele);
+        holder.rotation.setText(g.RotationControl);
+        holder.colorControl.setText(g.colorControl+"");
+        holder.balanced.setChecked(g.isBalance);
+        holder.balanced.setClickable(false);
+        holder.parked.setChecked(g.isParked);
+        holder.parked.setClickable(false);
+        holder.climbed.setChecked(g.isClimbed);
+        holder.climbed.setClickable(false);
+        holder.helped.setChecked(g.isHelperClimbed);
+        holder.helped.setClickable(false);
+        holder.defended.setChecked(g.isDefended);
+        holder.defended.setClickable(false);
+        holder.additional.setText(g.additionalComments);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return allData.size();
     }
 
     class Holder extends RecyclerView.ViewHolder {
@@ -38,7 +73,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.Holder> {
         private TextView autoHex;
         private TextView autoRect;
         private TextView autoCircle;
-        private TextView cellsColected;
+        private TextView cellsCollected;
         private TextView hex;
         private TextView rect;
         private TextView circle;
@@ -57,12 +92,12 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.Holder> {
             matchNumber = itemView.findViewById(R.id.matchNumberView);
             teamNumber = itemView.findViewById(R.id.teamNumberView);
             startPosition = itemView.findViewById(R.id.startPositionView);
-            preLoadedBalls = itemView.findViewById(R.id.preloadedBallsView);
             crossedLine = itemView.findViewById(R.id.crossedLineView);
             autoHex = itemView.findViewById(R.id.autoHexView);
             autoRect = itemView.findViewById(R.id.autoRectView);
             autoCircle = itemView.findViewById(R.id.autoCircleView);
-            cellsColected = itemView.findViewById(R.id.cellsCollectedView);
+            preLoadedBalls=itemView.findViewById(R.id.preloadedBallsView);
+            cellsCollected = itemView.findViewById(R.id.cellsCollectedView);
             hex = itemView.findViewById(R.id.hexView);
             rect = itemView.findViewById(R.id.rectView);
             circle = itemView.findViewById(R.id.circleView);
