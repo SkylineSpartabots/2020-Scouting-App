@@ -127,7 +127,7 @@ public class RecordAuto extends AppCompatActivity {
             public void onClick(View v) {
                 String autoText="";
                 String delimeter="#@;-;@#";
-                autoText+=matchNum.getText().toString() + delimeter+teamInput.getText().toString()+delimeter+blueRed.getText()+delimeter+cellsCollected.getValue()+delimeter+preloadNum.isChecked()
+                autoText+=matchNum.getText().toString()+" " + delimeter+teamInput.getText().toString()+" "+delimeter+blueRed.getText()+" "+delimeter+cellsCollected.getValue()+delimeter+preloadNum.isChecked()
                         +delimeter+ rectScore.getValue()+delimeter+circScore.getValue()+delimeter+hexScore.getValue()+delimeter+crossAuto.isChecked();
                 SharedPreferences sp= RecordAuto.this.getSharedPreferences("Saved Data",MODE_PRIVATE);
                 SharedPreferences.Editor ed=sp.edit();

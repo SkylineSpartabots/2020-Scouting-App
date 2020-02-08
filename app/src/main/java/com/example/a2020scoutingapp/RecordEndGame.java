@@ -84,7 +84,7 @@ public class RecordEndGame extends AppCompatActivity {
 
             @Override
             public void OnStringReceived(String s) {
-                Toast.makeText(RecordEndGame.this,"String received: "+s,Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecordEndGame.this,"Received Back: "+s,Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -157,7 +157,7 @@ public class RecordEndGame extends AppCompatActivity {
         String delimeter="#@;-;@#";
         String endText=delimeter+parked.isChecked()+delimeter+climbed.isChecked()+delimeter+helped.isChecked()+delimeter+balanced.isChecked()+defended.isChecked()
                 +delimeter+
-                additionalComments.getText().toString();
+                additionalComments.getText().toString()+" ";
         SharedPreferences sp= RecordEndGame.this.getSharedPreferences("Saved Data",MODE_PRIVATE);
         SharedPreferences.Editor ed=sp.edit();
         ed.putString("EndGameData",endText);

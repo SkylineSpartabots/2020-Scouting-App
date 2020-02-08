@@ -11,6 +11,7 @@ import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.nearby.connection.Strategy;
@@ -18,13 +19,17 @@ import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
+import java.util.ArrayList;
+
 public class AdvertiseMain extends AppCompatActivity {
     ImageButton cameraButton;
     Button advertiseButton;
     Button dataViewButton;
+    TextView userDisplay;
+    Button clearDisplay;
 
     final int REQUEST_IMAGE_CAPTURE = 1;
-
+     NearbyCreator nearby;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,25 +37,44 @@ public class AdvertiseMain extends AppCompatActivity {
         cameraButton = findViewById(R.id.cameraButton);
         advertiseButton = findViewById(R.id.advertisebutton);
         dataViewButton= findViewById(R.id.DataViewButton);
+        clearDisplay=findViewById(R.id.clearButton);
+        clearDisplay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userDisplay.setText("People:");
+                users.clear();
+            }
+        });
         dataViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+         nearby= new NearbyCreator(AdvertiseMain.this, "Labib Master", Strategy.P2P_STAR);
                 startActivity(new Intent(AdvertiseMain.this,DataView.class));
             }
         });
 
+        userDisplay=findViewById(R.id.textView2);
+        NearbyCreator.getPermissionToUseNearby(AdvertiseMain.this);
+
+
         advertiseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NearbyCreator.getPermissionToUseNearby(AdvertiseMain.this);
-                NearbyCreator nearby;
+             if(advertiseButton.getText().equals("Advertise")) {
+                 nearby.startAdvertising("Labib Master", advertising);
+                 Toast.makeText(AdvertiseMain.this, "advertising...", Toast.LENGTH_LONG).show();
+                 advertiseButton.setText("Stop Advertising");
+                 advertiseButton.setBackgroundColor(getResources().getColor(R.color.Red));
+             }else{
+                 nearby.stopAdvertising();
+                 advertiseButton.setBackgroundColor(getResources().getColor(R.color.Blue));
+                 advertiseButton.setText("Advertise");
 
-                    nearby = new NearbyCreator(AdvertiseMain.this, "Labib Master", Strategy.P2P_STAR);
+             }
 
 
 
-                Toast.makeText(AdvertiseMain.this, "advertising...", Toast.LENGTH_LONG).show();
+
 
             }
         });
@@ -74,6 +98,14 @@ public class AdvertiseMain extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStop() {
+        nearby.stopAllConnections();
+        super.onStop();
+    }
+
+    final ArrayList<String> users= new ArrayList<>();
+
 NearbyCreator.OptionsOfAdvertising advertising= new NearbyCreator.OptionsOfAdvertising() {
     @Override
     public void OnDiscoverySuccess() {
@@ -86,14 +118,18 @@ NearbyCreator.OptionsOfAdvertising advertising= new NearbyCreator.OptionsOfAdver
     }
 
     @Override
-    public void OnStringReceived(String s) {
-        Toast.makeText(AdvertiseMain.this,"String was received",Toast.LENGTH_SHORT).show();
-        //TODO Add to database
+    public void OnStringReceived(String user, String s) {
+        Toast.makeText(AdvertiseMain.this,"String was received from "+ user,Toast.LENGTH_SHORT).show();
+        DeString deString= new DeString(s);
+        users.add(user+": "+deString.teamNumber);
+       userDisplay.setText(userDisplay.getText()+"\n"+users.get(users.size()-1));
+       nearby.sendMessage(user,"Scouting Data received");
+       nearby.stopConnection(user);
     }
 
     @Override
     public void OnStringUpdate() {
-        Toast.makeText(AdvertiseMain.this,"Discovery was succesful",Toast.LENGTH_SHORT).show();
+
     }
 
     @Override

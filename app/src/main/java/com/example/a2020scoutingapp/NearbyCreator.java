@@ -132,8 +132,8 @@ public class NearbyCreator {
       }
     }, new StringReceived() {
       @Override
-      public void OnStringReceived(String s) {
-        optionsOfAdvertising.OnStringReceived(s);
+      public void OnStringReceived(String user, String s) {
+        optionsOfAdvertising.OnStringReceived(user,s);
       }
 
       @Override
@@ -151,7 +151,7 @@ public class NearbyCreator {
       @Override
       public void onPayloadReceived(@NonNull String s, @NonNull Payload payload) {
         String es = new String(payload.asBytes());
-        stringOptions.OnStringReceived(es);
+        stringOptions.OnStringReceived(s,es);
       }
 
       @Override
@@ -275,7 +275,7 @@ public class NearbyCreator {
       }
     }, new StringReceived() {
       @Override
-      public void OnStringReceived(String s) {
+      public void OnStringReceived(String s1, String s) {
         optionsOfDiscovery.OnStringReceived(s);
       }
 
@@ -296,7 +296,7 @@ public class NearbyCreator {
       public void onPayloadReceived(@NonNull String s, @NonNull Payload payload) {
         String es = new String(payload.asBytes());
         if(connections.contains(s)){
-        stringOptions.OnStringReceived(es);}
+        stringOptions.OnStringReceived(s, es);}
       }
 
       @Override
@@ -394,7 +394,7 @@ public class NearbyCreator {
 
     void OnDiscoveryFailure();
 
-    void OnStringReceived(String s);
+    void OnStringReceived(String s1, String s);
 
     void OnStringUpdate();
 
@@ -453,7 +453,7 @@ public class NearbyCreator {
 
   // this is called when a string is sent
   private interface StringReceived {
-    void OnStringReceived(String s);
+    void OnStringReceived(String s1, String s);
 
     //When string is succesfully transfered
     void OnUpdate();

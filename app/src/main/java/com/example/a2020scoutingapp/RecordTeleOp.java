@@ -86,7 +86,7 @@ public class RecordTeleOp extends AppCompatActivity {
                         rotationControl.getValue()+delimeter+pickColor.isChecked();
 
                 SharedPreferences.Editor ed=sp.edit();
-                ed.putString("TeleData",teleText);
+                ed.putString("TeleData",teleText).apply();
 
 
                 startActivity(new Intent(RecordTeleOp.this,RecordEndGame.class));
