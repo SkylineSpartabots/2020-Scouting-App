@@ -11,7 +11,7 @@ public class GameData {
     @PrimaryKey(autoGenerate = true)
     public int id;
     @ColumnInfo(name= "MatchNumber")
-    public int matchNumber;
+    public String matchNumber;
 
     @ColumnInfo(name= "TeamNumber")
     public String teamNumber;
@@ -35,14 +35,37 @@ public class GameData {
     @ColumnInfo(name= "Power cells shot in Circle Auto")//may not be used
     public int cellsShotCircleAuto;
 
-    @ColumnInfo(name= "Power Cells Shot and missed in Auto")
-    public int cellsMissed;
 
     // max 20
     @ColumnInfo(name= "Power Cells Collected in Auto")
     public int cellsCollected;
 
-// Teleop
+    public GameData(String matchNumber, String teamNumber, String startSide, boolean preloadedBalls, boolean crossedLine, int cellsShotHexagonAuto, int cellsShotRectAuto, int cellsShotCircleAuto, int cellsCollected, int cellsShotHexagon, int cellsShotRect, int cellsShotCircle, int cellsMissedTele, int rotationControl, boolean colorControl, boolean isParked, boolean isClimbed, boolean isHelperClimbed, boolean isBalance, boolean isDefended, String additionalComments) {
+        this.matchNumber = matchNumber;
+        this.teamNumber = teamNumber;
+        this.startSide = startSide;
+        this.preloadedBalls = preloadedBalls;
+        this.crossedLine = crossedLine;
+        this.cellsShotHexagonAuto = cellsShotHexagonAuto;
+        this.cellsShotRectAuto = cellsShotRectAuto;
+        this.cellsShotCircleAuto = cellsShotCircleAuto;
+
+        this.cellsCollected = cellsCollected;
+        this.cellsShotHexagon = cellsShotHexagon;
+        this.cellsShotRect = cellsShotRect;
+        this.cellsShotCircle = cellsShotCircle;
+        this.cellsMissedTele = cellsMissedTele;
+        RotationControl = rotationControl;
+        this.colorControl = colorControl;
+        this.isParked = isParked;
+        this.isClimbed = isClimbed;
+        this.isHelperClimbed = isHelperClimbed;
+        this.isBalance = isBalance;
+        this.isDefended = isDefended;
+        this.additionalComments = additionalComments;
+    }
+
+    // Teleop
 
     @ColumnInfo(name= "Power cells shot in Hexagon")
     public int cellsShotHexagon;
@@ -81,6 +104,8 @@ public class GameData {
 
     @ColumnInfo(name= "Balanced")
     public boolean isBalance;
+    @ColumnInfo(name= "Defended")
+    public boolean isDefended;
 
     // an large edit text
     @ColumnInfo(name= "Additional Comments")

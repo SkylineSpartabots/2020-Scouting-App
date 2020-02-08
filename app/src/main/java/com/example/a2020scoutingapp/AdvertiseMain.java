@@ -27,7 +27,7 @@ public class AdvertiseMain extends AppCompatActivity {
     Button dataViewButton;
     TextView userDisplay;
     Button clearDisplay;
-
+    GameRepository gameRepository;
     final int REQUEST_IMAGE_CAPTURE = 1;
      NearbyCreator nearby;
     @Override
@@ -38,6 +38,7 @@ public class AdvertiseMain extends AppCompatActivity {
         advertiseButton = findViewById(R.id.advertisebutton);
         dataViewButton= findViewById(R.id.DataViewButton);
         clearDisplay=findViewById(R.id.clearButton);
+        gameRepository=new GameRepository(this.getApplication());
         clearDisplay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,6 +122,10 @@ NearbyCreator.OptionsOfAdvertising advertising= new NearbyCreator.OptionsOfAdver
     public void OnStringReceived(String user, String s) {
         Toast.makeText(AdvertiseMain.this,"String was received from "+ user,Toast.LENGTH_SHORT).show();
         DeString deString= new DeString(s);
+        GameData gd= new GameData(deString.matchNumber,deString.teamNumber,deString.startSide,deString.preloadedBalls,deString.crossedLine,
+                deString.cellsShotHexagonAuto,deString.cellsShotRectAuto,deString.cellsShotCircleAuto,deString.cellsCollected,deString.cellsShotHexagon,deString.cellsShotRect,deString.cellsShotCircle,deString.cellsMissedTele,deString.rotationControl,deString.colorControl,deString.isParked,deString.isClimbed,deString.isHelperClimbed,deString.isBalanced,
+                deString.isDefense(),deString.additionalComments);
+        gameRepository.insert(gd);
         users.add(user+": "+deString.teamNumber);
        userDisplay.setText(userDisplay.getText()+"\n"+users.get(users.size()-1));
        nearby.sendMessage(user,"Scouting Data received");
@@ -179,8 +184,11 @@ NearbyCreator.OptionsOfAdvertising advertising= new NearbyCreator.OptionsOfAdver
             SparseArray<Barcode> barcodes = detector.detect(frame);
             Barcode thisCode = barcodes.valueAt(0);
             String finalValue=thisCode.displayValue;
-            //TODO Add to database final qr value
-
+            DeString deString= new DeString(finalValue);
+            GameData gd= new GameData(deString.matchNumber,deString.teamNumber,deString.startSide,deString.preloadedBalls,deString.crossedLine,
+                    deString.cellsShotHexagonAuto,deString.cellsShotRectAuto,deString.cellsShotCircleAuto,deString.cellsCollected,deString.cellsShotHexagon,deString.cellsShotRect,deString.cellsShotCircle,deString.cellsMissedTele,deString.rotationControl,deString.colorControl,deString.isParked,deString.isClimbed,deString.isHelperClimbed,deString.isBalanced,
+                    deString.isDefense(),deString.additionalComments);
+            gameRepository.insert(gd);
         }
     }
 }

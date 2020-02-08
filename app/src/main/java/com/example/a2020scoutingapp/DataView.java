@@ -18,14 +18,14 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class DataView extends AppCompatActivity {
-
+    GameRepository gameRepository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_view);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        gameRepository=new GameRepository(this.getApplication());
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
