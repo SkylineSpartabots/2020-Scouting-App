@@ -46,10 +46,11 @@ public class AdvertiseMain extends AppCompatActivity {
                 users.clear();
             }
         });
+        nearby= new NearbyCreator(AdvertiseMain.this, "Labib Master", Strategy.P2P_STAR);
+
         dataViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-         nearby= new NearbyCreator(AdvertiseMain.this, "Labib Master", Strategy.P2P_STAR);
                 startActivity(new Intent(AdvertiseMain.this,DataView.class));
             }
         });
@@ -171,7 +172,7 @@ NearbyCreator.OptionsOfAdvertising advertising= new NearbyCreator.OptionsOfAdver
 
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-
+            Log.d("sp","got IMAGE DATA");
             BarcodeDetector detector =
                     new BarcodeDetector.Builder(getApplicationContext())
                             .setBarcodeFormats(Barcode.DATA_MATRIX | Barcode.QR_CODE)
@@ -182,13 +183,20 @@ NearbyCreator.OptionsOfAdvertising advertising= new NearbyCreator.OptionsOfAdver
             }
             Frame frame = new Frame.Builder().setBitmap(imageBitmap).build();
             SparseArray<Barcode> barcodes = detector.detect(frame);
+            if(barcodes.size()!=0){
             Barcode thisCode = barcodes.valueAt(0);
             String finalValue=thisCode.displayValue;
+            Log.d("sp","String received: "+finalValue);
             DeString deString= new DeString(finalValue);
             GameData gd= new GameData(deString.matchNumber,deString.teamNumber,deString.startSide,deString.preloadedBalls,deString.crossedLine,
                     deString.cellsShotHexagonAuto,deString.cellsShotRectAuto,deString.cellsShotCircleAuto,deString.cellsCollected,deString.cellsShotHexagon,deString.cellsShotRect,deString.cellsShotCircle,deString.cellsMissedTele,deString.rotationControl,deString.colorControl,deString.isParked,deString.isClimbed,deString.isHelperClimbed,deString.isBalanced,
                     deString.isDefense(),deString.additionalComments);
-            gameRepository.insert(gd);
+            gameRepository.insert(gd);}else{
+                Toast.makeText(this,"No barcodes found",Toast.LENGTH_SHORT).show();
+
+            }
+        }else{
+            Log.d("sp","Everything failed ");
         }
     }
 }

@@ -31,20 +31,20 @@ public class DataAdapter extends
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         GameData g=allData.get(position);
-        holder.matchNumber.setText(g.matchNumber);
-        holder.teamNumber.setText(g.teamNumber);
+        holder.matchNumber.setText(g.matchNumber+"");
+        holder.teamNumber.setText(g.teamNumber+"");
         holder.startPosition.setText(g.startSide);
         holder.preLoadedBalls.setText(g.preloadedBalls+"");
-        holder.autoCircle.setText(g.cellsShotCircleAuto);
-        holder.autoHex.setText(g.cellsShotHexagonAuto);
-        holder.autoRect.setText(g.cellsShotRectAuto);
+        holder.autoCircle.setText(g.cellsShotCircleAuto+"");
+        holder.autoHex.setText(g.cellsShotHexagonAuto+"");
+        holder.autoRect.setText(g.cellsShotRectAuto+"");
         holder.crossedLine.setText(g.crossedLine+"");
-        holder.cellsCollected.setText(g.cellsCollected);
-        holder.hex.setText(g.cellsShotHexagon);
-        holder.rect.setText(g.cellsShotRect);
-        holder.circle.setText(g.cellsShotCircle);
-        holder.missed.setText(g.cellsMissedTele);
-        holder.rotation.setText(g.RotationControl);
+        holder.cellsCollected.setText(g.cellsCollected+"");
+        holder.hex.setText(g.cellsShotHexagon+"");
+        holder.rect.setText(g.cellsShotRect+"");
+        holder.circle.setText(g.cellsShotCircle+"");
+        holder.missed.setText(g.cellsMissedTele+"");
+        holder.rotation.setText(g.rotationControl+"");
         holder.colorControl.setText(g.colorControl+"");
         holder.balanced.setChecked(g.isBalance);
         holder.balanced.setClickable(false);

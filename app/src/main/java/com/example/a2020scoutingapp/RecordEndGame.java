@@ -31,60 +31,65 @@ public class RecordEndGame extends AppCompatActivity {
     EditText clientName;
     NearbyCreator nc;
     Button exit;
+    SharedPreferences spe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_end_game);
+        spe = getSharedPreferences("Saved Data", 0);
         Toolbar toolbar = findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
-        helped= findViewById(R.id.checkBox3);
-        parked= findViewById(R.id.checkBox5);
-        balanced=findViewById(R.id.checkBox2);
-        climbed=findViewById(R.id.checkBox4);
-        defended=findViewById(R.id.Defended);
-        additionalComments=findViewById(R.id.addtionalComments);
-        showQR=findViewById(R.id.QR);
-        clientName=findViewById(R.id.AdName);
-        qrImage=findViewById(R.id.imageView);
-        advertise=findViewById(R.id.advertise);
+        helped = findViewById(R.id.checkBox3);
+        parked = findViewById(R.id.checkBox5);
+        balanced = findViewById(R.id.checkBox2);
+        climbed = findViewById(R.id.checkBox4);
+        defended = findViewById(R.id.Defended);
+        additionalComments = findViewById(R.id.addtionalComments);
+        showQR = findViewById(R.id.QR);
+        clientName = findViewById(R.id.AdName);
+        qrImage = findViewById(R.id.imageView);
+        advertise = findViewById(R.id.advertise);
+        exit = findViewById(R.id.Exit);
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences spe= RecordEndGame.this.getSharedPreferences("Saved Data",MODE_PRIVATE);
-                spe.edit().putString("AutoData","").apply();
-                spe.edit().putString("TeleData","").apply();
-                spe.edit().putString("EndGameData","").apply();
-                startActivity(new Intent(RecordEndGame.this,MainActivity.class));
+                SharedPreferences spe = RecordEndGame.this.getSharedPreferences("Saved Data", MODE_PRIVATE);
+                spe.edit().putString("AutoData", "").apply();
+                spe.edit().putString("TeleData", "").apply();
+                spe.edit().putString("EndGameData", "").apply();
+                startActivity(new Intent(RecordEndGame.this, MainActivity.class));
             }
         });
         showQR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 stringEndgame();
-                SharedPreferences spe= RecordEndGame.this.getSharedPreferences("Saved Data",MODE_PRIVATE);
 
-                QRCreator cd= new QRCreator(""+spe.getString("AutoData","")+spe.getString("TeleData","")+spe.getString("EndGameData",""),20,20);
+
+                QRCreator cd = new QRCreator(stringAll(), 1000, 1000);
                 qrImage.setImageBitmap(cd.getBitmap());
+                qrImage.setVisibility(View.VISIBLE);
 
             }
         });
 
-        nc= new NearbyCreator(this, "", Strategy.P2P_POINT_TO_POINT);
-        final NearbyCreator.OptionsOfDiscovery optionsOfDiscovery=new NearbyCreator.OptionsOfDiscovery() {
+        nc = new NearbyCreator(this, "", Strategy.P2P_POINT_TO_POINT);
+        final NearbyCreator.OptionsOfDiscovery optionsOfDiscovery = new NearbyCreator.OptionsOfDiscovery() {
             @Override
             public void OnDiscoverySuccess() {
-                Toast.makeText(RecordEndGame.this,"Discovery Starting ",Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecordEndGame.this, "Discovery Starting ", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void OnDiscoveryFailure() {
-                Toast.makeText(RecordEndGame.this,"Discovery Failing please contact Davin or Pranav ",Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecordEndGame.this, "Discovery Failing please contact Davin or Pranav ", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void OnStringReceived(String s) {
-                Toast.makeText(RecordEndGame.this,"Received Back: "+s,Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecordEndGame.this, "Received Back: " + s, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -95,28 +100,28 @@ public class RecordEndGame extends AppCompatActivity {
             @Override
             public void OnConnectionGood(String s) {
 
-                if(s.equals("Labib Master")) {
-                    SharedPreferences spe = getSharedPreferences("Saved Data", 0);
+                if (s.equals("Labib Master")) {
+
                     nc.sendMessage("Labib Master", getSharedPreferences("Saved Data", MODE_PRIVATE).getString(
                             "" + spe.getString("AutoData", "") + spe.getString("TeleData", "") + spe.getString("EndGameData", ""), ""));
-                }else{
+                } else {
                     nc.stopConnection(s);
                 }
             }
 
             @Override
             public void OnConnectionError() {
-                Toast.makeText(RecordEndGame.this,"Connection error",Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecordEndGame.this, "Connection error", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void OnConnectionRejected() {
-                Toast.makeText(RecordEndGame.this,"You have been rejected",Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecordEndGame.this, "You have been rejected", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void OnConnectionDisconnected() {
-                Toast.makeText(RecordEndGame.this,"Connection disconnected",Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecordEndGame.this, "Connection disconnected", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -126,17 +131,17 @@ public class RecordEndGame extends AppCompatActivity {
 
             @Override
             public void OnConnectionSuccess() {
-                Toast.makeText(RecordEndGame.this,"Connection success",Toast.LENGTH_SHORT).show();
-             }
+                Toast.makeText(RecordEndGame.this, "Connection success", Toast.LENGTH_SHORT).show();
+            }
 
             @Override
             public void OnConnectionFailure() {
-                Toast.makeText(RecordEndGame.this,"Connection failed",Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecordEndGame.this, "Connection failed", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void OnConnectionLost() {
-                Toast.makeText(RecordEndGame.this,"Connection lost",Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecordEndGame.this, "Connection lost", Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -145,24 +150,40 @@ public class RecordEndGame extends AppCompatActivity {
             public void onClick(View view) {
                 stringEndgame();
 
-                if(!clientName.getText().toString().equals("")){
-                nc.startDiscovery(clientName.getText().toString(),optionsOfDiscovery);}else{
+                if (!clientName.getText().toString().equals("")) {
+                    nc.startDiscovery(clientName.getText().toString(), optionsOfDiscovery);
+                } else {
                     clientName.setError("Please enter a name");
                 }
             }
         });
     }
 
-    private  void stringEndgame(){
-        String delimeter="#@;-;@#";
-        String endText=delimeter+parked.isChecked()+delimeter+climbed.isChecked()+delimeter+helped.isChecked()+delimeter+balanced.isChecked()+defended.isChecked()
-                +delimeter+
-                additionalComments.getText().toString()+" ";
-        SharedPreferences sp= RecordEndGame.this.getSharedPreferences("Saved Data",MODE_PRIVATE);
-        SharedPreferences.Editor ed=sp.edit();
-        ed.putString("EndGameData",endText);
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SharedPreferences.Editor e=getSharedPreferences("Saved Data",MODE_PRIVATE).edit();
+        e.putString("AutoData","");
+        e.putString("TeleData","");
+        e.putString("EndGameData","");
+    }
+
+    private void stringEndgame() {
+        String delimeter = "#@;-;@#";
+        additionalComments.setText(additionalComments.getText().toString()+" ");
+        String endText = delimeter + parked.isChecked() + delimeter + climbed.isChecked() + delimeter + helped.isChecked() + delimeter + balanced.isChecked() + delimeter+defended.isChecked()
+                + delimeter +
+                additionalComments.getText().toString() + " ";
+        SharedPreferences sp = RecordEndGame.this.getSharedPreferences("Saved Data", MODE_PRIVATE);
+        SharedPreferences.Editor ed = sp.edit();
+        ed.putString("EndGameData", endText).apply();
 
 
+    }
+
+    public String stringAll() {
+
+        return "" + spe.getString("AutoData", "") + spe.getString("TeleData", "") + spe.getString("EndGameData", "");
     }
 
 

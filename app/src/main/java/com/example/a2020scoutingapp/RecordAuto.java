@@ -21,6 +21,8 @@ import android.widget.Spinner;
 import android.widget.ToggleButton;
 import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class RecordAuto extends AppCompatActivity {
@@ -39,7 +41,7 @@ public class RecordAuto extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //don't mess with this
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recording_data);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -61,9 +63,7 @@ public class RecordAuto extends AppCompatActivity {
         if(!s.equals("")){
             Scanner sc= new Scanner(s);
             sc.useDelimiter(this.getString(R.string.delimeter));
-            //  autoText+=teamInput.getText().toString()+delimeter+blueRed.getText()+delimeter+cellsCollected.getValue()+delimeter+preloadNum.isChecked()
-            //                        +delimeter+ rectScore.getValue()+delimeter+circScore.getValue()+delimeter+hexScore.getValue()+delimeter+crossAuto.isChecked();
-
+          matchNum.setText(sc.next());
             teamInput.setText(sc.next());
             String r=sc.next();
             if(r.equals("red")){
@@ -79,7 +79,12 @@ public class RecordAuto extends AppCompatActivity {
 
         }
         //ArrayAdapter
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.positions,R.layout.content_recording_data);
+        List<String> spinnerList=new ArrayList<>();
+        spinnerList.add("Left");
+        spinnerList.add("Middle");
+        spinnerList.add("Right");
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,spinnerList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         chooseSide.setAdapter(adapter);
         //array of scores
         NumberPicker [] scores = {rectScore,circScore,hexScore};
@@ -127,11 +132,11 @@ public class RecordAuto extends AppCompatActivity {
             public void onClick(View v) {
                 String autoText="";
                 String delimeter="#@;-;@#";
-                autoText+=matchNum.getText().toString()+" " + delimeter+teamInput.getText().toString()+" "+delimeter+blueRed.getText()+" "+delimeter+cellsCollected.getValue()+delimeter+preloadNum.isChecked()
+                autoText+=matchNum.getText().toString()+"." + delimeter+teamInput.getText().toString()+"."+delimeter+blueRed.getText()+" "+delimeter+cellsCollected.getValue()+delimeter+preloadNum.isChecked()
                         +delimeter+ rectScore.getValue()+delimeter+circScore.getValue()+delimeter+hexScore.getValue()+delimeter+crossAuto.isChecked();
                 SharedPreferences sp= RecordAuto.this.getSharedPreferences("Saved Data",MODE_PRIVATE);
                 SharedPreferences.Editor ed=sp.edit();
-                ed.putString("AutoData",autoText);
+                ed.putString("AutoData",autoText).apply();
 
                 startActivity(new Intent(RecordAuto.this,RecordTeleOp.class));
             }

@@ -1,6 +1,8 @@
 package com.example.a2020scoutingapp;
 
 
+import android.util.Log;
+
 import java.util.Scanner;
 
 
@@ -201,15 +203,18 @@ public class DeString {
 
     public DeString(String s){
         this.str = s;
+        Log.d("sp","String received: "+s);
         Scanner deScan = new Scanner(s);
         deScan.useDelimiter("#@;-;@#");
         this.matchNumber = deScan.next();
         this.teamNumber = deScan.next();
         this.alliance = deScan.next();
         this.cellsCollected = deScan.nextInt();
+        this.preloadedBalls=deScan.nextBoolean();
         this.cellsShotRectAuto = deScan.nextInt();
         this.cellsShotCircleAuto = deScan.nextInt();
         this.cellsShotHexagonAuto = deScan.nextInt();
+        this.crossedLine=deScan.nextBoolean();
         this.cellsShotRect= deScan.nextInt();
         this.cellsShotCircle = deScan.nextInt();
         this.cellsShotHexagon = deScan.nextInt();
@@ -284,10 +289,6 @@ public class DeString {
     public String additionalComments;
 
 
-//calculated values
-
-    //may not actually need this
-    public int threePointPercentage;
 
 }
 

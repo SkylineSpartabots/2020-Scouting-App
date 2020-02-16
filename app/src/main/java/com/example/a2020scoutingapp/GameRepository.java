@@ -15,7 +15,13 @@ public class GameRepository {
     GameRepository(Application application) {
         GameDatabase db = GameDatabase.getDatabase(application);
         dao = db.dao();
-        allData = dao.allData();
+        try {
+            allData = new getAllTeamDataAsyncTask(dao).execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     List<GameData> getAllGames() {
@@ -115,6 +121,19 @@ public class GameRepository {
             return mAsyncTaskDao.allTeamData(ints[0]);
         }
     }
+    private static class getAllTeamDataAsyncTask extends AsyncTask<Void, Void, List<GameData>> {
 
+        private GameDataDAO mAsyncTaskDao;
+
+        getAllTeamDataAsyncTask(GameDataDAO dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected List<GameData> doInBackground(Void... voids) {
+
+            return mAsyncTaskDao.allData();
+        }
+    }
 
 }
