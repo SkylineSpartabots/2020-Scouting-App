@@ -2,6 +2,7 @@ package com.example.a2020scoutingapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.google.android.gms.nearby.connection.DiscoveredEndpointInfo;
@@ -75,7 +76,7 @@ public class RecordEndGame extends AppCompatActivity {
             }
         });
 
-        nc = new NearbyCreator(this, "", Strategy.P2P_POINT_TO_POINT);
+        nc = new NearbyCreator(this, clientName.getText().toString(), Strategy.P2P_POINT_TO_POINT);
         final NearbyCreator.OptionsOfDiscovery optionsOfDiscovery = new NearbyCreator.OptionsOfDiscovery() {
             @Override
             public void OnDiscoverySuccess() {
@@ -83,12 +84,13 @@ public class RecordEndGame extends AppCompatActivity {
             }
 
             @Override
-            public void OnDiscoveryFailure() {
-                Toast.makeText(RecordEndGame.this, "Discovery Failing please contact Davin or Pranav ", Toast.LENGTH_SHORT).show();
+            public void OnDiscoveryFailure(Exception e) {
+                Toast.makeText(RecordEndGame.this, "Discovery Failing please contact Davin or Pranav", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
             }
 
             @Override
-            public void OnStringReceived(String s) {
+            public void OnStringReceived(String user,String s) {
                 Toast.makeText(RecordEndGame.this, "Received Back: " + s, Toast.LENGTH_SHORT).show();
             }
 
@@ -135,7 +137,7 @@ public class RecordEndGame extends AppCompatActivity {
             }
 
             @Override
-            public void OnConnectionFailure() {
+            public void OnConnectionFailure(Exception e) {
                 Toast.makeText(RecordEndGame.this, "Connection failed", Toast.LENGTH_SHORT).show();
             }
 
@@ -151,10 +153,20 @@ public class RecordEndGame extends AppCompatActivity {
                 stringEndgame();
 
                 if (!clientName.getText().toString().equals("")) {
+                    if(advertise.getText().toString().toLowerCase().equals("advertise")){
                     nc.startDiscovery(clientName.getText().toString(), optionsOfDiscovery);
+                    advertise.setText("Stop Advertising");
+                    advertise.setBackgroundColor(Color.RED);}else{
+                        nc.stopDiscovery();
+                        Toast.makeText(RecordEndGame.this,"Discovery Stopped",Toast.LENGTH_SHORT).show();
+                        advertise.setText("Advertise");
+                        advertise.setBackgroundColor(Color.BLUE);
+
+                    }
                 } else {
                     clientName.setError("Please enter a name");
                 }
+
             }
         });
     }

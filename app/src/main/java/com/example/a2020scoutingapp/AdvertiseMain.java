@@ -115,8 +115,9 @@ NearbyCreator.OptionsOfAdvertising advertising= new NearbyCreator.OptionsOfAdver
     }
 
     @Override
-    public void OnDiscoveryFailure() {
-        Toast.makeText(AdvertiseMain.this,"Discovery was succesful",Toast.LENGTH_SHORT).show();
+    public void OnDiscoveryFailure(Exception e) {
+        Toast.makeText(AdvertiseMain.this,"Advertising was unsuccessful",Toast.LENGTH_SHORT).show();
+        e.printStackTrace();
     }
 
     @Override

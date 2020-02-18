@@ -28,7 +28,7 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     def vision_version = "19.0.0"
     implementation "com.google.android.gms:play-services-vision:$vision_version"
-    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+
     def nearby_version = "17.0.0"
     implementation "com.google.android.gms:play-services-nearby:$nearby_version"
     def zxing_version = "3.2.1"
@@ -36,7 +36,7 @@ dependencies {
 
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     def room_version = "2.2.3"
-
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
     implementation "androidx.room:room-runtime:$room_version"
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 }
