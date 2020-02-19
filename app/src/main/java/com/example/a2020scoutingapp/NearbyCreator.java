@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.widget.Toast;
 
 import com.google.android.gms.nearby.Nearby;
 import com.google.android.gms.nearby.connection.AdvertisingOptions;
@@ -309,6 +310,7 @@ public class NearbyCreator {
     final ConnectionLifecycleCallback connectionLifecycleCallback = new ConnectionLifecycleCallback() {
       @Override
       public void onConnectionInitiated(@NonNull String s, @NonNull ConnectionInfo connectionInfo) {
+        Toast.makeText(context,"Found endpoint accepting connection may not work",Toast.LENGTH_SHORT).show();
         Nearby.getConnectionsClient(context).acceptConnection(s, payloadCallback);
       }
 
@@ -329,6 +331,7 @@ public class NearbyCreator {
             break;
           default:
             // Unknown status code
+            Toast.makeText(context,"getting a weird error"+s ,Toast.LENGTH_SHORT).show();
         }
       }
 
@@ -342,7 +345,7 @@ public class NearbyCreator {
     EndpointDiscoveryCallback endpointDiscoveryCallback = new EndpointDiscoveryCallback() {
       @Override
       public void onEndpointFound(@NonNull String s, @NonNull final DiscoveredEndpointInfo discoveredEndpointInfo) {
-
+        Toast.makeText(context,"Got endpoint now but nothing else"+s ,Toast.LENGTH_SHORT).show();
         Nearby.getConnectionsClient(context)
                 .requestConnection(name, s, connectionLifecycleCallback)
                 .addOnSuccessListener(

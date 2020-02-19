@@ -76,8 +76,8 @@ public class RecordEndGame extends AppCompatActivity {
             }
         });
 
-        nc = new NearbyCreator(this, clientName.getText().toString(), Strategy.P2P_POINT_TO_POINT);
-        final NearbyCreator.OptionsOfDiscovery optionsOfDiscovery = new NearbyCreator.OptionsOfDiscovery() {
+        nc = new NearbyCreator(this, "Scouting-App2020", Strategy.P2P_POINT_TO_POINT);
+        final NearbyCreator .OptionsOfDiscovery optionsOfDiscovery = new NearbyCreator.OptionsOfDiscovery() {
             @Override
             public void OnDiscoverySuccess() {
                 Toast.makeText(RecordEndGame.this, "Discovery Starting ", Toast.LENGTH_SHORT).show();
@@ -91,24 +91,20 @@ public class RecordEndGame extends AppCompatActivity {
 
             @Override
             public void OnStringReceived(String user,String s) {
-                Toast.makeText(RecordEndGame.this, "Received Back: " + s, Toast.LENGTH_SHORT).show();
+                Toast.makeText(RecordEndGame.this, "Received Back: " + s, Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void OnStringUpdate() {
-
+                Toast.makeText(RecordEndGame.this, "Update occured", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void OnConnectionGood(String s) {
+                    Toast.makeText(RecordEndGame.this, "Connection should have worked",Toast.LENGTH_SHORT).show();
+                    nc.sendMessage(s,
+                            "" + spe.getString("AutoData", "") + spe.getString("TeleData", "") + spe.getString("EndGameData", ""));
 
-                if (s.equals("Labib Master")) {
-
-                    nc.sendMessage("Labib Master", getSharedPreferences("Saved Data", MODE_PRIVATE).getString(
-                            "" + spe.getString("AutoData", "") + spe.getString("TeleData", "") + spe.getString("EndGameData", ""), ""));
-                } else {
-                    nc.stopConnection(s);
-                }
             }
 
             @Override
@@ -128,7 +124,8 @@ public class RecordEndGame extends AppCompatActivity {
 
             @Override
             public boolean Authenticated(@NonNull DiscoveredEndpointInfo discoveredEndpointInfo) {
-                return true;
+                Toast.makeText(RecordEndGame.this,"Got endpoint",Toast.LENGTH_SHORT).show();
+                return discoveredEndpointInfo.getServiceId().equals("Labib Master");
             }
 
             @Override
@@ -139,6 +136,7 @@ public class RecordEndGame extends AppCompatActivity {
             @Override
             public void OnConnectionFailure(Exception e) {
                 Toast.makeText(RecordEndGame.this, "Connection failed", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
             }
 
             @Override
@@ -154,6 +152,7 @@ public class RecordEndGame extends AppCompatActivity {
 
                 if (!clientName.getText().toString().equals("")) {
                     if(advertise.getText().toString().toLowerCase().equals("advertise")){
+                        Toast.makeText(RecordEndGame.this,"advertising..." ,Toast.LENGTH_SHORT).show();
                     nc.startDiscovery(clientName.getText().toString(), optionsOfDiscovery);
                     advertise.setText("Stop Advertising");
                     advertise.setBackgroundColor(Color.RED);}else{

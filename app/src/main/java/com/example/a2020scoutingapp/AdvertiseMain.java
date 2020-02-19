@@ -46,8 +46,7 @@ public class AdvertiseMain extends AppCompatActivity {
                 users.clear();
             }
         });
-        nearby= new NearbyCreator(AdvertiseMain.this, "Labib Master", Strategy.P2P_STAR);
-
+        nearby= new NearbyCreator(AdvertiseMain.this, "Scouting-App2020", Strategy.P2P_POINT_TO_POINT);
         dataViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,7 +110,7 @@ public class AdvertiseMain extends AppCompatActivity {
 NearbyCreator.OptionsOfAdvertising advertising= new NearbyCreator.OptionsOfAdvertising() {
     @Override
     public void OnDiscoverySuccess() {
-        Toast.makeText(AdvertiseMain.this,"Discovery was succesful",Toast.LENGTH_SHORT).show();
+        Toast.makeText(AdvertiseMain.this,"Discovery was successful",Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -141,17 +140,17 @@ NearbyCreator.OptionsOfAdvertising advertising= new NearbyCreator.OptionsOfAdver
 
     @Override
     public void OnConnectionGood(String s) {
-
+        Toast.makeText(AdvertiseMain.this,"Got endpoint: "+s ,Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void OnConnectionError() {
-
+        Toast.makeText(AdvertiseMain.this,"Got error: " ,Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void OnConnectionRejected() {
-
+        Toast.makeText(AdvertiseMain.this,"Got rejected!" ,Toast.LENGTH_SHORT).show();
     }
 
     @Override
