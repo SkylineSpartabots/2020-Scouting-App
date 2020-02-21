@@ -40,17 +40,16 @@ public class MainActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(MainActivity.this,(RecordAuto.class)));
+                startActivity(new Intent(MainActivity.this,(RecordAuto.class)));
 
-                validate(userName.getText().toString(), passWord.getText().toString());
+                //validate(userName.getText().toString(), passWord.getText().toString());
             }
         });
 
     }
     private void validate(String userName, String passWord){
-//        if (userName.equals("thanksdavin") && passWord.equals("thankspranav")){
-//            startActivity(new Intent(MainActivity.this,(AdvertiseMain.class)));
-//       }else{Toast.makeText(this,"Password or Username is incorrect", Toast.LENGTH_SHORT).show();}
-        startActivity(new Intent(MainActivity.this,(AdvertiseMain.class)));
+        if (userName.equals("2976") && passWord.equals("dpworlds")){
+            startActivity(new Intent(MainActivity.this,(RecordAuto.class)));
+        }
     }
 }
