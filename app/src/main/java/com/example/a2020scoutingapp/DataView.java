@@ -104,34 +104,34 @@ public class DataView extends AppCompatActivity {
     }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.data_view_menu, menu);
-
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.filterButton:
-                // User chose the "create" item, show the app settings UI...
-                Log.d("Testing", "Selected Create");
-                FilterDialogBox dialogBox = new FilterDialogBox();
-                dialogBox.show(getSupportFragmentManager(), "new Website");
-
-
-                return true;
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
-
-
-        }
-
-
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater menuInflater = getMenuInflater();
+//        menuInflater.inflate(R.menu.data_view_menu, menu);
+//
+//
+//        return true;
+//    }
+////
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.filterButton:
+//                // User chose the "create" item, show the app settings UI...
+//                Log.d("Testing", "Selected Create");
+//                FilterDialogBox dialogBox = new FilterDialogBox();
+//                dialogBox.show(getSupportFragmentManager(), "new Website");
+//
+//
+//                return true;
+//            default:
+//                // If we got here, the user's action was not recognized.
+//                // Invoke the superclass to handle it.
+//                return super.onOptionsItemSelected(item);
+//
+//
+//        }
+//
+//
+//    }
 }

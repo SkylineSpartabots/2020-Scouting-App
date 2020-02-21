@@ -76,7 +76,7 @@ public class RecordEndGame extends AppCompatActivity {
             }
         });
 
-        nc = new NearbyCreator(this, "Scouting-App2020", Strategy.P2P_POINT_TO_POINT);
+        nc = new NearbyCreator(this, "Scouting-App2020", Strategy.P2P_STAR);
         final NearbyCreator .OptionsOfDiscovery optionsOfDiscovery = new NearbyCreator.OptionsOfDiscovery() {
             @Override
             public void OnDiscoverySuccess() {

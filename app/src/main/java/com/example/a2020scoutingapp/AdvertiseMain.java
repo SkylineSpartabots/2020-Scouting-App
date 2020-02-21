@@ -39,7 +39,7 @@ public class AdvertiseMain extends AppCompatActivity {
 
         gameRepository=new GameRepository(this.getApplication());
 
-        nearby= new NearbyCreator(AdvertiseMain.this, "Scouting-App2020", Strategy.P2P_POINT_TO_POINT);
+        nearby= new NearbyCreator(AdvertiseMain.this, "Scouting-App2020", Strategy.P2P_STAR);
         dataViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,8 +114,9 @@ NearbyCreator.OptionsOfAdvertising advertising= new NearbyCreator.OptionsOfAdver
 
     @Override
     public void OnStringReceived(String user, String s) {
-        Toast.makeText(AdvertiseMain.this,"String was received from "+ user,Toast.LENGTH_SHORT).show();
         DeString deString= new DeString(s);
+        Toast.makeText(AdvertiseMain.this,"Data on team "+ deString.getTeamNumber()+" was received",Toast.LENGTH_SHORT).show();
+
         GameData gd= new GameData(deString.matchNumber,deString.teamNumber,deString.startSide,deString.preloadedBalls,deString.crossedLine,
                 deString.cellsShotHexagonAuto,deString.cellsShotRectAuto,0,deString.cellsCollected,deString.cellsShotHexagon,deString.cellsShotRect,0,deString.cellsMissedTele,deString.rotationControl,deString.colorControl,deString.isParked,deString.isClimbed,deString.isHelperClimbed,deString.isBalanced,
                 deString.isDefense(),deString.additionalComments);
