@@ -32,7 +32,7 @@ public class RecordAuto extends AppCompatActivity {
     NumberPicker cellsCollected;
     CheckBox preloadNum;
     NumberPicker rectScore;
-    NumberPicker circScore;
+
     NumberPicker hexScore;
     CheckBox crossAuto;
     EditText matchNum;
@@ -55,7 +55,7 @@ public class RecordAuto extends AppCompatActivity {
         preloadNum = findViewById(R.id.hasPreload);
         crossAuto = findViewById(R.id.crossCheck);
         rectScore = findViewById(R.id.rectScore);
-        circScore = findViewById(R.id.circScore);
+
         hexScore = findViewById(R.id.hexScore);
         toTeleOp = findViewById(R.id.teleButton);
         cellsCollected = findViewById(R.id.cellsCollected);
@@ -73,7 +73,7 @@ public class RecordAuto extends AppCompatActivity {
             cellsCollected.setValue(sc.nextInt());
             preloadNum.setChecked(sc.nextBoolean());
             rectScore.setValue(sc.nextInt());
-            circScore.setValue(sc.nextInt());
+
             hexScore.setValue(sc.nextInt());
             crossAuto.setChecked(sc.nextBoolean());
 
@@ -87,7 +87,7 @@ public class RecordAuto extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         chooseSide.setAdapter(adapter);
         //array of scores
-        NumberPicker [] scores = {rectScore,circScore,hexScore};
+        NumberPicker [] scores = {rectScore,hexScore};
         for (int i = 0; i < scores.length; i++) {
             scores[i].setWrapSelectorWheel(false);
             scores[i].setMaxValue(50);
@@ -133,7 +133,7 @@ public class RecordAuto extends AppCompatActivity {
                 String autoText="";
                 String delimeter="#@;-;@#";
                 autoText+=matchNum.getText().toString()+" " + delimeter+teamInput.getText().toString()+" "+delimeter+blueRed.getText()+" "+delimeter+cellsCollected.getValue()+delimeter+preloadNum.isChecked()
-                        +delimeter+ rectScore.getValue()+delimeter+circScore.getValue()+delimeter+hexScore.getValue()+delimeter+crossAuto.isChecked();
+                        +delimeter+ rectScore.getValue()+delimeter+hexScore.getValue()+delimeter+crossAuto.isChecked();
                 SharedPreferences sp= RecordAuto.this.getSharedPreferences("Saved Data",MODE_PRIVATE);
                 SharedPreferences.Editor ed=sp.edit();
                 ed.putString("AutoData",autoText).apply();

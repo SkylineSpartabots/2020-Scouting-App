@@ -212,11 +212,9 @@ public class DeString {
         this.cellsCollected = deScan.nextInt();
         this.preloadedBalls=deScan.nextBoolean();
         this.cellsShotRectAuto = deScan.nextInt();
-        this.cellsShotCircleAuto = deScan.nextInt();
         this.cellsShotHexagonAuto = deScan.nextInt();
         this.crossedLine=deScan.nextBoolean();
         this.cellsShotRect= deScan.nextInt();
-        this.cellsShotCircle = deScan.nextInt();
         this.cellsShotHexagon = deScan.nextInt();
         this.cellsMissed = deScan.nextInt();
         this.rotationControl = deScan.nextInt();

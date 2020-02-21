@@ -21,7 +21,6 @@ public class RecordTeleOp extends AppCompatActivity {
     CheckBox pickColor;
     Button endGame;
     NumberPicker rectNum;
-    NumberPicker circNum;
     NumberPicker hexNum;
     NumberPicker missNum;
     NumberPicker rotationControl;
@@ -35,7 +34,7 @@ public class RecordTeleOp extends AppCompatActivity {
         setSupportActionBar(toolbar);
         missNum= findViewById(R.id.missedShots);
         hexNum=findViewById(R.id.hexNumPick);
-        circNum= findViewById(R.id.circNumPick);
+
         rectNum= findViewById(R.id.rectNumPick);
         rotationControl= findViewById(R.id.rotateControl);
 
@@ -49,12 +48,12 @@ public class RecordTeleOp extends AppCompatActivity {
         missNum.setMaxValue(50);
         hexNum.setMaxValue(50);
         rectNum.setMaxValue(50);
-        circNum.setMaxValue(50);
+
         rotationControl.setMaxValue(2);
         missNum.setMinValue(0);
         hexNum.setMinValue(0);
         rectNum.setMinValue(0);
-        circNum.setMinValue(0);
+
         rotationControl.setMinValue(0);
         final SharedPreferences sp= RecordTeleOp.this.getSharedPreferences("Saved Data",MODE_PRIVATE);
         String se=sp.getString("TeleData","");
@@ -62,7 +61,6 @@ public class RecordTeleOp extends AppCompatActivity {
             Scanner sc =new Scanner(se);
             sc.useDelimiter("#@;-;@#");
             rectNum.setValue(sc.nextInt());
-            circNum.setValue(sc.nextInt());
             hexNum.setValue(sc.nextInt());
             missNum.setValue(sc.nextInt());
             rotationControl.setValue(sc.nextInt());
@@ -75,7 +73,7 @@ public class RecordTeleOp extends AppCompatActivity {
             public void onClick(View v) {
 
                 String delimeter="#@;-;@#";
-                String teleText=delimeter+rectNum.getValue()+delimeter+circNum.getValue()+delimeter+hexNum.getValue()+delimeter+missNum.getValue()+delimeter+
+                String teleText=delimeter+rectNum.getValue()+delimeter+hexNum.getValue()+delimeter+missNum.getValue()+delimeter+
                         rotationControl.getValue()+delimeter+pickColor.isChecked();
 
                 SharedPreferences.Editor ed=sp.edit();

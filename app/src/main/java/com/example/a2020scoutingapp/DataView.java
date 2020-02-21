@@ -80,15 +80,14 @@ public class DataView extends AppCompatActivity {
                     FileOutputStream fileOutputStream =
                             new FileOutputStream(pfd.getFileDescriptor());
 
-                    fileOutputStream.write(("matchNumber,teamNumber,startPosition,preLoadedBalls,autoRect," +
-                            "autoHex,autoCircle,crossedLine,cellsCollected,Bottom Port,Top Port,Inner Port,missed," +
+                    fileOutputStream.write(("matchNumber,teamNumber,startPosition,preLoadedBalls,auto-bottom port," +
+                            "auto-Outer port,crossedLine,cellsCollected,Bottom Port,Top Port,missed," +
                                     "rotation,colorControl,balanced,parked,climbed,helped," +
                                     "defended,additionalComments").getBytes());
                     for(GameData gd:allData){
                         fileOutputStream.write(("\n"+gd.matchNumber+","+gd.teamNumber+","+gd.startSide+","+gd.preloadedBalls+","+gd.cellsShotRectAuto+","+
-                                gd.cellsShotHexagonAuto+","+gd.cellsShotCircleAuto+","+gd.crossedLine+","+
-                                gd.cellsCollected+","+gd.cellsShotRect+","+gd.cellsShotHexagon+","+
-                                gd.cellsShotCircle+","+gd.cellsMissedTele+","+
+                                gd.cellsShotHexagonAuto+","+gd.crossedLine+","+
+                                gd.cellsCollected+","+gd.cellsShotRect+","+gd.cellsShotHexagon+","+gd.cellsMissedTele+","+
                                 gd.rotationControl+","+gd.colorControl+","+gd.isBalance()+","+gd.isParked+","+gd.isClimbed+","
                                 +gd.isHelperClimbed+","+gd.isDefended+","+gd.additionalComments).getBytes());
                     }

@@ -25,8 +25,7 @@ public class AdvertiseMain extends AppCompatActivity {
     ImageButton cameraButton;
     Button advertiseButton;
     Button dataViewButton;
-    TextView userDisplay;
-    Button clearDisplay;
+
     GameRepository gameRepository;
     final int REQUEST_IMAGE_CAPTURE = 1;
      NearbyCreator nearby;
@@ -37,15 +36,9 @@ public class AdvertiseMain extends AppCompatActivity {
         cameraButton = findViewById(R.id.cameraButton);
         advertiseButton = findViewById(R.id.advertisebutton);
         dataViewButton= findViewById(R.id.DataViewButton);
-        clearDisplay=findViewById(R.id.clearButton);
+
         gameRepository=new GameRepository(this.getApplication());
-        clearDisplay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                userDisplay.setText("People:");
-                users.clear();
-            }
-        });
+
         nearby= new NearbyCreator(AdvertiseMain.this, "Scouting-App2020", Strategy.P2P_POINT_TO_POINT);
         dataViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +47,7 @@ public class AdvertiseMain extends AppCompatActivity {
             }
         });
 
-        userDisplay=findViewById(R.id.textView2);
+
         NearbyCreator.getPermissionToUseNearby(AdvertiseMain.this);
 
 
@@ -124,11 +117,11 @@ NearbyCreator.OptionsOfAdvertising advertising= new NearbyCreator.OptionsOfAdver
         Toast.makeText(AdvertiseMain.this,"String was received from "+ user,Toast.LENGTH_SHORT).show();
         DeString deString= new DeString(s);
         GameData gd= new GameData(deString.matchNumber,deString.teamNumber,deString.startSide,deString.preloadedBalls,deString.crossedLine,
-                deString.cellsShotHexagonAuto,deString.cellsShotRectAuto,deString.cellsShotCircleAuto,deString.cellsCollected,deString.cellsShotHexagon,deString.cellsShotRect,deString.cellsShotCircle,deString.cellsMissedTele,deString.rotationControl,deString.colorControl,deString.isParked,deString.isClimbed,deString.isHelperClimbed,deString.isBalanced,
+                deString.cellsShotHexagonAuto,deString.cellsShotRectAuto,0,deString.cellsCollected,deString.cellsShotHexagon,deString.cellsShotRect,0,deString.cellsMissedTele,deString.rotationControl,deString.colorControl,deString.isParked,deString.isClimbed,deString.isHelperClimbed,deString.isBalanced,
                 deString.isDefense(),deString.additionalComments);
         gameRepository.insert(gd);
         users.add(user+": "+deString.teamNumber);
-       userDisplay.setText(userDisplay.getText()+"\n"+users.get(users.size()-1));
+
        nearby.sendMessage(user,"Scouting Data received");
        nearby.stopConnection(user);
     }
@@ -188,8 +181,9 @@ NearbyCreator.OptionsOfAdvertising advertising= new NearbyCreator.OptionsOfAdver
             String finalValue=thisCode.displayValue;
             Log.d("sp","String received: "+finalValue);
             DeString deString= new DeString(finalValue);
-            GameData gd= new GameData(deString.matchNumber,deString.teamNumber,deString.startSide,deString.preloadedBalls,deString.crossedLine,
-                    deString.cellsShotHexagonAuto,deString.cellsShotRectAuto,deString.cellsShotCircleAuto,deString.cellsCollected,deString.cellsShotHexagon,deString.cellsShotRect,deString.cellsShotCircle,deString.cellsMissedTele,deString.rotationControl,deString.colorControl,deString.isParked,deString.isClimbed,deString.isHelperClimbed,deString.isBalanced,
+            GameData gd= new GameData(deString.matchNumber,deString.teamNumber,deString.startSide,deString.preloadedBalls,
+                    deString.crossedLine,
+                    deString.cellsShotHexagonAuto,deString.cellsShotRectAuto,0,deString.cellsCollected,deString.cellsShotHexagon,deString.cellsShotRect,0,deString.cellsMissedTele,deString.rotationControl,deString.colorControl,deString.isParked,deString.isClimbed,deString.isHelperClimbed,deString.isBalanced,
                     deString.isDefense(),deString.additionalComments);
             gameRepository.insert(gd);}else{
                 Toast.makeText(this,"No barcodes found",Toast.LENGTH_SHORT).show();

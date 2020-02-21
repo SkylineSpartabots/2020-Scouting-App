@@ -29,7 +29,7 @@ public class RecordEndGame extends AppCompatActivity {
     Button advertise;
     Button showQR;
     ImageView qrImage;
-    EditText clientName;
+
     NearbyCreator nc;
     Button exit;
     SharedPreferences spe;
@@ -49,7 +49,7 @@ public class RecordEndGame extends AppCompatActivity {
         defended = findViewById(R.id.Defended);
         additionalComments = findViewById(R.id.addtionalComments);
         showQR = findViewById(R.id.QR);
-        clientName = findViewById(R.id.AdName);
+
         qrImage = findViewById(R.id.imageView);
         advertise = findViewById(R.id.advertise);
         exit = findViewById(R.id.Exit);
@@ -150,10 +150,9 @@ public class RecordEndGame extends AppCompatActivity {
             public void onClick(View view) {
                 stringEndgame();
 
-                if (!clientName.getText().toString().equals("")) {
                     if(advertise.getText().toString().toLowerCase().equals("advertise")){
                         Toast.makeText(RecordEndGame.this,"advertising..." ,Toast.LENGTH_SHORT).show();
-                    nc.startDiscovery(clientName.getText().toString(), optionsOfDiscovery);
+                    nc.startDiscovery("Scouting-App2020", optionsOfDiscovery);
                     advertise.setText("Stop Advertising");
                     advertise.setBackgroundColor(Color.RED);}else{
                         nc.stopDiscovery();
@@ -162,9 +161,7 @@ public class RecordEndGame extends AppCompatActivity {
                         advertise.setBackgroundColor(Color.BLUE);
 
                     }
-                } else {
-                    clientName.setError("Please enter a name");
-                }
+
 
             }
         });
