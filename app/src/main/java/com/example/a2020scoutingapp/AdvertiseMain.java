@@ -58,7 +58,7 @@ public class AdvertiseMain extends AppCompatActivity {
                  nearby.startAdvertising("Labib Master", advertising);
                  Toast.makeText(AdvertiseMain.this, "advertising...", Toast.LENGTH_LONG).show();
                  advertiseButton.setText("Stop Advertising");
-                 advertiseButton.setBackgroundColor(getResources().getColor(R.color.Red));
+                 advertiseButton.setBackgroundColor(getResources().getColor(R.color.primaryGreen));
              }else{
                  nearby.stopAdvertising();
                  advertiseButton.setBackgroundColor(getResources().getColor(R.color.Blue));

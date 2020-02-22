@@ -158,7 +158,7 @@ public class RecordEndGame extends AppCompatActivity {
                         nc.stopDiscovery();
                         Toast.makeText(RecordEndGame.this,"Discovery Stopped",Toast.LENGTH_SHORT).show();
                         advertise.setText("Advertise");
-                        advertise.setBackgroundColor(Color.BLUE);
+                        advertise.setBackgroundColor(getResources().getColor(R.color.primaryGreen));
 
                     }
 

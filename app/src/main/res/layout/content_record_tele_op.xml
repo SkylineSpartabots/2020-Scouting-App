@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:isScrollContainer="true"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
     tools:context=".RecordTeleOp"
     tools:showIn="@layout/activity_record_tele_op">
 
@@ -23,6 +23,7 @@
             android:text="TeleOp "
             android:textAlignment="center"
             android:textAllCaps="false"
+            android:textColor="@color/primaryGreen"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -37,14 +38,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Bottom Port" />
+                android:text="Bottom Port"
+                android:textColor="@color/primaryGreen" />
 
             <TextView
                 android:id="@+id/hexTele"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Top Port" />
+                android:text="Top Port"
+                android:textColor="@color/primaryGreen" />
         </LinearLayout>
 
         <LinearLayout
@@ -150,7 +153,9 @@
             android:id="@+id/endGame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Endgame" />
+            android:backgroundTint="@color/primaryGreen"
+            android:text="Endgame"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 </LinearLayout>

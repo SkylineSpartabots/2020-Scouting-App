@@ -32,7 +32,7 @@ public class FilterDialogBox extends DialogFragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View view = inflater.inflate(R.layout.filter_dialog_box, null);
-        addFilter=view.findViewById(R.id.filterButton);
+//        addFilter=view.findViewById(R.id.filterButton);
         ed=view.findViewById(R.id.filterEditText);
         filters= new ArrayList<>();
         final TextView viewFilters =view.findViewById(R.id.ViewFilters);

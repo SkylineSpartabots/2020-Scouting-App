@@ -63,6 +63,8 @@ public class DataAdapter extends
         holder.defended.setChecked(g.isDefended);
         holder.defended.setClickable(false);
         holder.additional.setText(g.additionalComments);
+        holder.sizeUpdate();
+       // holder.columSizeUpdate();
     }
 
     @Override
@@ -114,7 +116,57 @@ public class DataAdapter extends
         private TextView balancedq;
         private TextView defendedq;
         private TextView additionalq;
+        public void columSizeUpdate() {
 
+            //setting widths to each other
+            matchNumberq.setWidth(matchNumber.getMeasuredWidth());
+            teamNumberq.setWidth(teamNumber.getMeasuredWidth());
+            startPositionq.setWidth(startPosition.getMeasuredWidth());
+            crossedLineq.setWidth(crossedLine.getMeasuredWidth());
+            autoHexq.setWidth(autoHex.getMeasuredWidth());
+            autoRectq.setWidth(autoRect.getMeasuredWidth());
+
+            preLoadedBallsq.setWidth(preLoadedBalls.getMeasuredWidth());
+            cellsCollectedq.setWidth(cellsCollected.getMeasuredWidth());
+            hexq.setWidth(hex.getMeasuredWidth());
+            rectq.setWidth(rect.getMeasuredWidth());
+
+            missedq.setWidth(missed.getMeasuredWidth());
+            rotationq.setWidth(rotation.getMeasuredWidth());
+            colorControlq.setWidth(colorControl.getMeasuredWidth());
+            parkedq.setWidth(parked.getMeasuredWidth());
+            climbedq.setWidth(climbed.getMeasuredWidth());
+            helpedq.setWidth(helped.getMeasuredWidth());
+            balancedq.setWidth(balanced.getMeasuredWidth());
+            defendedq.setWidth(defended.getMeasuredWidth());
+            additionalq.setWidth(additional.getMeasuredWidth());
+        }
+            public void sizeUpdate(){
+
+            //setting widths to each other
+            matchNumber.setWidth(matchNumberq.getMeasuredWidth());
+            teamNumber.setWidth(teamNumberq.getMeasuredWidth());
+            startPosition.setWidth(startPositionq.getMeasuredWidth());
+            crossedLine.setWidth(crossedLineq.getMeasuredWidth());
+            autoHex .setWidth(autoHexq.getMeasuredWidth());
+            autoRect.setWidth(autoRectq.getMeasuredWidth());
+
+            preLoadedBalls.setWidth(preLoadedBallsq.getMeasuredWidth());
+            cellsCollected.setWidth(cellsCollectedq.getMeasuredWidth());
+            hex .setWidth(hexq.getMeasuredWidth());
+            rect.setWidth(rectq.getMeasuredWidth());
+
+            missed.setWidth(missedq.getMeasuredWidth());
+            rotation.setWidth(rotationq.getMeasuredWidth());
+            colorControl.setWidth(colorControlq.getMeasuredWidth());
+            parked.setWidth(parkedq.getMeasuredWidth());
+            climbed.setWidth(climbedq.getMeasuredWidth());
+            helped .setWidth(helpedq.getMeasuredWidth());
+            balanced.setWidth(balancedq.getMeasuredWidth());
+            defended.setWidth(defendedq.getMeasuredWidth());
+            additional.setWidth(additionalq.getMeasuredWidth());
+
+        }
         public Holder(@NonNull View itemView) {
             super(itemView);
             collumnNames=itemView.findViewById(R.id.CollumNames);
@@ -161,29 +213,6 @@ public class DataAdapter extends
             balancedq = itemView.findViewById(R.id.balancedViewq);
             defendedq = itemView.findViewById(R.id.defendedViewq);
             additionalq = itemView.findViewById(R.id.additionalViewq);
-
-            //setting widths to each other
-            matchNumber.setWidth(matchNumberq.getWidth());
-            teamNumber.setWidth(teamNumberq.getWidth());
-            startPosition.setWidth(startPositionq.getWidth());
-            crossedLine.setWidth(crossedLineq.getWidth());
-            autoHex .setWidth(autoHexq.getWidth());
-            autoRect.setWidth(autoRectq.getWidth());
-
-            preLoadedBalls.setWidth(preLoadedBallsq.getWidth());
-            cellsCollected.setWidth(cellsCollectedq.getWidth());
-            hex .setWidth(hexq.getWidth());
-            rect.setWidth(rectq.getWidth());
-
-            missed.setWidth(missedq.getWidth());
-            rotation.setWidth(rotationq.getWidth());
-            colorControl.setWidth(colorControlq.getWidth());
-            parked.setWidth(parkedq.getWidth());
-            climbed.setWidth(climbedq.getWidth());
-            helped .setWidth(helpedq.getWidth());
-            balanced.setWidth(balancedq.getWidth());
-            defended.setWidth(defendedq.getWidth());
-            additional.setWidth(additionalq.getWidth());
 
 
 
